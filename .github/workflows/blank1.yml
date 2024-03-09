@@ -1,17 +1,16 @@
-name: Copy Images and Info
+name: Copy All Files
 
 on:
   pull_request:
     paths:
-      - 'origin_imgs/**/*'
-      - 'flutter/reuso/**/*'
+      - '**/*'
 
 jobs:
   copy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Repositories
       uses: actions/checkout@v2
 
     - name: Set Up Git
@@ -29,16 +28,12 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
-    - name: Remove Existing origin_imgs in MOBILE_TCC
+    - name: Copy All Files to MOBILE_TCC
       run: |
-        rm -rf origin_imgs
-
-    - name: Copy Images and Info to MOBILE_TCC
-      run: |
-        cp -r ../Design_CARDENA/origin_imgs/* ../Design_CARDENA/flutter/reuso/* .
+        cp -r ../Design_CARDENA/* .
 
     - name: Commit and Push to MOBILE_TCC
       run: |
         git add .
-        git commit -m "Copy images and info from Design_CARDENA"
+        git commit -m "Copy all files from Design_CARDENA"
         git push origin HEAD:refs/heads/main
