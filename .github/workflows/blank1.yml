@@ -15,10 +15,13 @@ jobs:
       - name: Change to Repository Directory
         run: cd $GITHUB_WORKSPACE  # Change to the root directory of the repository
 
+      - name: Create Output
+        run: sh ./build.sh
+
       - name: Push to Another Repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
           source-directory: '.'  # Push all files in the root directory
           destination-github-username: 'markfinn0'
