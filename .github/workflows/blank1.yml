@@ -1,14 +1,14 @@
-name: Copy OpenAPI File
+name: Copy All Files
 
 on:
   push:
     branches:
       - main  # Ajuste para a branch principal do repositório Design_CARDENA
     paths:
-      - 'Design_CARDENA/notehub/api/openapi.yaml'
+      - '**/*'
 
 jobs:
-  copy_openapi_file:
+  copy_all_files:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +22,9 @@ jobs:
       with:
         repository: markfinn0/teste_mobile  # Ajuste para o seu repositório teste_mobile
 
-    - name: Copy OpenAPI file
+    - name: Copy All Files
       run: |
-        cp Design_CARDENA/notehub/api/openapi.yaml teste_mobile/
+        cp -r Design_CARDENA/* teste_mobile/
 
     - name: Configure Git for teste_mobile Repository
       run: |
@@ -35,5 +35,5 @@ jobs:
     - name: Commit and Push to teste_mobile
       run: |
         git add .
-        git commit -m "Copy OpenAPI file from Design_CARDENA"
+        git commit -m "Copy all files from Design_CARDENA"
         git push origin HEAD:refs/heads/main  # Ajuste para a branch principal do repositório teste_mobile
