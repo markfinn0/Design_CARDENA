@@ -29,9 +29,13 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
+    - name: Remove Existing origin_imgs in MOBILE_TCC
+      run: |
+        rm -rf origin_imgs
+
     - name: Copy Images and Info to MOBILE_TCC
       run: |
-        cp -r origin_imgs flutter/reuso .
+        cp -r ../Design_CARDENA/origin_imgs ../Design_CARDENA/flutter/reuso .
 
     - name: Commit and Push to MOBILE_TCC
       run: |
