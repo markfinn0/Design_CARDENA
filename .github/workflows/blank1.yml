@@ -1,39 +1,27 @@
-name: Copy All Files
+name: CI
 
 on:
   push:
-    branches:
-      - main  # Ajuste para a branch principal do repositório Design_CARDENA
-    paths:
-      - '**/*'
+    branches: [main, teste]
 
 jobs:
-  copy_all_files:
+  build:
     runs-on: ubuntu-latest
-
+    container: pandoc/latex
     steps:
-    - name: Checkout Design_CARDENA Repository
-      uses: actions/checkout@v2
-      with:
-        repository: markfinn0/Design_CARDENA  # Ajuste para o seu repositório Design_CARDENA
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Checkout teste_mobile Repository
-      uses: actions/checkout@v2
-      with:
-        repository: markfinn0/teste_mobile  # Ajuste para o seu repositório teste_mobile
+      - name: Create Output
+        run: sh ./build.sh
 
-    - name: Copy All Files
-      run: |
-        cp -r Design_CARDENA/* teste_mobile/
-
-    - name: Configure Git for teste_mobile Repository
-      run: |
-        cd teste_mobile
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-
-    - name: Commit and Push to teste_mobile
-      run: |
-        git add .
-        git commit -m "Copy all files from Design_CARDENA"
-        git push origin HEAD:refs/heads/main  # Ajuste para a branch principal do repositório teste_mobile
+      - name: Push to Another Repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: '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'  # Use GITHUB_TOKEN instead of API_TOKEN_GITHUB
+        with:
+          source-directory: 'https://github.com/markfinn0/Design_CARDENA.git'
+          destination-github-username: 'markfinn0'  # Troque para o seu nome de usuário do GitHub
+          destination-repository-name: 'https://github.com/markfinn0/teste_mobile.git'
+          user-email: 'marquinhossouzarodrigueslive@gmail.com'  # Troque para o seu endereço de e-mail do GitHub
+          target-branch: main
