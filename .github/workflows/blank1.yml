@@ -14,16 +14,22 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Set Up Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        
+    - name: Clone MOBILE_TCC Repository
+      run: |
+        git clone https://github.com/markfinn0/teste_mobile.git ../teste_mobile
+
     - name: Copy Images and Info to MOBILE_TCC
       run: |
-        mkdir -p ../teste_mobile
         cp -r origin_imgs flutter/reuso ../teste_mobile/
 
     - name: Commit and Push to MOBILE_TCC
       run: |
         cd ../teste_mobile
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
         git add .
         git commit -m "Copy images and info from Design_CARDENA"
         git push
