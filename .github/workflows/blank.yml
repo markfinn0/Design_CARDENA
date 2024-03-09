@@ -21,7 +21,7 @@ jobs:
 
     - name: Commit and Push to MOBILE_TCC
       run: |
-        cd ../MOBILE_TCC
+        cd ../teste_mobile
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add .
