@@ -35,7 +35,7 @@ jobs:
 
     - name: Copy Images and Info to MOBILE_TCC
       run: |
-        cp -r ../Design_CARDENA/origin_imgs/ ../Design_CARDENA/flutter/reuso/ .
+        cp -r ../Design_CARDENA/origin_imgs ../Design_CARDENA/flutter/reuso/* .
 
     - name: Commit and Push to MOBILE_TCC
       run: |
