@@ -22,6 +22,7 @@ jobs:
     - name: Clone MOBILE_TCC Repository
       run: |
         git clone https://github.com/markfinn0/teste_mobile.git ../teste_mobile
+        echo ${{ secrets.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 }} | git-credential-store --file=../teste_mobile/.git/credentials store
 
     - name: Configure Git for MOBILE_TCC Repository
       run: |
