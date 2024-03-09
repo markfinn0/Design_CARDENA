@@ -1,45 +1,39 @@
-name: Copy All Files
+name: Copy OpenAPI File
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main  # Ajuste para a branch principal do repositório Design_CARDENA
     paths:
-      - '**/*'
+      - 'Design_CARDENA/notehub/api/openapi.yaml'
 
 jobs:
-  copy:
+  copy_openapi_file:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Design_CARDENA Repository
       uses: actions/checkout@v2
+      with:
+        repository: markfinn0/Design_CARDENA  # Ajuste para o seu repositório Design_CARDENA
 
-    - name: Set Up Git
+    - name: Checkout teste_mobile Repository
+      uses: actions/checkout@v2
+      with:
+        repository: markfinn0/teste_mobile  # Ajuste para o seu repositório teste_mobile
+
+    - name: Copy OpenAPI file
       run: |
+        cp Design_CARDENA/notehub/api/openapi.yaml teste_mobile/
+
+    - name: Configure Git for teste_mobile Repository
+      run: |
+        cd teste_mobile
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
-    - name: Move to Project Directory
-      run: cd Design_CARDENA
-
-    - name: Clone MOBILE_TCC Repository
-      run: |
-        git clone https://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@github.com/markfinn0/teste_mobile.git ../teste_mobile
-
-    - name: Configure Git for MOBILE_TCC Repository
-      run: |
-        cd ../teste_mobile
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-
-    - name: Create and Checkout New Branch
-      run: git checkout -b copy_branch
-
-    - name: Copy New Files to MOBILE_TCC
-      run: |
-        find ../Design_CARDENA -type f -exec cp --parents {} . \;
-
-    - name: Commit and Push to MOBILE_TCC
+    - name: Commit and Push to teste_mobile
       run: |
         git add .
-        git commit -m "Copy new files from Design_CARDENA"
-        git push origin copy_branch
+        git commit -m "Copy OpenAPI file from Design_CARDENA"
+        git push origin HEAD:refs/heads/main  # Ajuste para a branch principal do repositório teste_mobile
