@@ -28,12 +28,12 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
-    - name: Copy All Files to MOBILE_TCC
+    - name: Copy New Files to MOBILE_TCC
       run: |
-        cp -r ../Design_CARDENA/* .
+        find ../Design_CARDENA -type f -exec cp --parents {} . \;
 
     - name: Commit and Push to MOBILE_TCC
       run: |
         git add .
-        git commit -m "Copy all files from Design_CARDENA"
+        git commit -m "Copy new files from Design_CARDENA"
         git push origin HEAD:refs/heads/main
