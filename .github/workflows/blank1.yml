@@ -10,13 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repositories
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Set Up Git
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
+
+    - name: Move to Project Directory
+      run: cd Design_CARDENA
 
     - name: Clone MOBILE_TCC Repository
       run: |
@@ -28,6 +31,9 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
 
+    - name: Create and Checkout New Branch
+      run: git checkout -b copy_branch
+
     - name: Copy New Files to MOBILE_TCC
       run: |
         find ../Design_CARDENA -type f -exec cp --parents {} . \;
@@ -36,4 +42,4 @@ jobs:
       run: |
         git add .
         git commit -m "Copy new files from Design_CARDENA"
-        git push origin HEAD:refs/heads/main
+        git push origin copy_branch
