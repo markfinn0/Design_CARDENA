@@ -22,7 +22,6 @@ jobs:
     - name: Clone MOBILE_TCC Repository
       run: |
         git clone https://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@github.com/markfinn0/teste_mobile.git ../teste_mobile
-        echo ${{ secrets.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 }} | git-credential-store --file=../teste_mobile/.git/credentials store
 
     - name: Configure Git for MOBILE_TCC Repository
       run: |
@@ -32,11 +31,10 @@ jobs:
 
     - name: Copy Images and Info to MOBILE_TCC
       run: |
-        cp -r origin_imgs flutter/reuso ../teste_mobile/
+        cp -r origin_imgs flutter/reuso .
 
     - name: Commit and Push to MOBILE_TCC
       run: |
-        cd ../teste_mobile
         git add .
         git commit -m "Copy images and info from Design_CARDENA"
-        git push
+        git push origin HEAD:refs/heads/main
