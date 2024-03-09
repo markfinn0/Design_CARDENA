@@ -18,11 +18,11 @@ jobs:
       - name: Push to Another Repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          SSH_DEPLOY_KEY: 'Jkl4C3kFa+JiH6JIA0+3QpiD7JYV+V9mBcPkVH61Fq0'
-          API_TOKEN_GITHUB: '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'  # Use GITHUB_TOKEN instead of API_TOKEN_GITHUB
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GITHUB_TOKEN instead of API_TOKEN_GITHUB
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: 'https://github.com/markfinn0/Design_CARDENA.git'
-          destination-github-username: 'markfinn0'  # Troque para o seu nome de usuário do GitHub
-          destination-repository-name: 'https://github.com/markfinn0/teste_mobile.git'
-          user-email: 'marquinhossouzarodrigueslive@gmail.com'  # Troque para o seu endereço de e-mail do GitHub
+          source-directory: '.'  # Ponto indica o diretório atual
+          destination-github-username: 'markfinn0'
+          destination-repository-name: 'teste_mobile'
+          user-email: 'marquinhossouzarodrigueslive@gmail.com'
           target-branch: main
