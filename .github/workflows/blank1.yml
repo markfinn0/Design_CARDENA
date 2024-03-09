@@ -18,10 +18,16 @@ jobs:
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        
+
     - name: Clone MOBILE_TCC Repository
       run: |
         git clone https://github.com/markfinn0/teste_mobile.git ../teste_mobile
+
+    - name: Configure Git for MOBILE_TCC Repository
+      run: |
+        cd ../teste_mobile
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
 
     - name: Copy Images and Info to MOBILE_TCC
       run: |
