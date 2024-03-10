@@ -10,25 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout teste_mobile
+    - name: Checkout Repositories
       uses: actions/checkout@v2
       with:
         repository: markfinn0/teste_mobile
+        path: teste_mobile
 
-    - name: Set up Git
+    - name: Set up SSH
       run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        echo -n $ACCESS_TOKEN > ~/.github_token
-        git config --global credential.helper "store --file=$HOME/.github_token"
+        mkdir -p ~/.ssh
+        echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-    - name: Copy Changes from Design_CARDENA to teste_mobile
+    - name: Copy and Commit to Another Repository
       run: |
-        cd ..
-        rm -rf teste_mobile/*  # Remove todos os arquivos existentes no teste_mobile
-        cp -R Design_CARDENA/. teste_mobile
-        cd teste_mobile
+        mkdir -p temp_repo
+        cd temp_repo
+        git clone git@github.com:markfinn0/Design_CARDENA.git
+        cd Design_CARDENA
+        cp -R "${GITHUB_WORKSPACE}/origin_imgs/." .
+        cd ../teste_mobile
         git add .
-        git commit -m "Copy repository changes from Design_CARDENA"
-        git push
-
+        git commit -m "Copy repository changes"
+        GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa" git push
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
