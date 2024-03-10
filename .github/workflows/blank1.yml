@@ -16,7 +16,7 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+        ssh-keygen -t rsa -b 4096 -C "marquinhossouzarodrigueslive@gmail.com" -f ~/.ssh/id_rsa -N ""
         echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
         cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
         chmod 600 ~/.ssh/id_rsa
