@@ -16,9 +16,11 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
+        ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+        echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+        cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        chmod 700 ~/.ssh
 
     - name: Copy and Commit to Another Repository
       run: |
@@ -30,5 +32,3 @@ jobs:
         git add .
         git commit -m "Copy repository changes"
         GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa" git push
-      env:
-        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
