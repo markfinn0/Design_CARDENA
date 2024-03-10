@@ -25,20 +25,6 @@ jobs:
       run: |
         cd teste_mobile/
         ls -al
-      continue-on-error: true
+      
 
-    - name: Copy Changes from Design_CARDENA to teste_mobile
-      run: |
-        rm -rf teste_mobile/*  # Remove todos os arquivos existentes no teste_mobile
-        ls -al
-        cp -R Design_CARDENA/. teste_mobile/  # Corrigido para copiar para o diretório teste_mobile/
-        cd teste_mobile/
-        git add .
-        git commit -m "Copy repository changes from Design_CARDENA"
-        git push
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-    - name: Show content of teste_mobile after copying
-      run: |
-        ls -al
+  
