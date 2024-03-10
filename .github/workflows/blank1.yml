@@ -33,3 +33,4 @@ jobs:
           destination-directory: "origin_imgs"
           commit-email: "marquinhossouzarodrigueslive@gmail.com"
           commit-message: "Update from ORIGIN_COMMIT"
+          API_TOKEN_GITHUB: "${{ secrets.GITHUB_TOKEN }}"
