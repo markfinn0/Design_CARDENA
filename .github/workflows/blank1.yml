@@ -10,12 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repositories
+    - name: Checkout teste_mobile
       uses: actions/checkout@v2
       with:
-        repositories:
-          - markfinn0/teste_mobile
-          - markfinn0/Design_CARDENA
+        repository: markfinn0/teste_mobile
 
     - name: Set up Git
       run: |
@@ -26,9 +24,9 @@ jobs:
 
     - name: Copy Changes from Design_CARDENA to teste_mobile
       run: |
-        cd Design_CARDENA
-        cp -R . ../teste_mobile
-        cd ../teste_mobile
+        cd teste_mobile
+        git rm -r .  # Remove todos os arquivos existentes no teste_mobile
+        cp -R ../Design_CARDENA/. .
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
         git push
