@@ -18,7 +18,7 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-files: 'origin_imgs/.'  # Push all files in the root directory
+          source-files: 'CARDENA_BLACK_LOGO_FUND.png'  # Push all files in the root directory
           destination-github-username: 'markfinn0'
           destination_repo: 'markfinn0/teste_mobile'
           destination-folder: 'origin_imgs'  # Push all files in the root directory
