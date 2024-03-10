@@ -14,7 +14,6 @@ jobs:
       run: |
         git config --global user.name "markfinn0"
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
-        ssh-keygen -t rsa -b 4096 -C "marquinhossouzarodrigueslive@gmail.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
         mkdir -p ~/.ssh
