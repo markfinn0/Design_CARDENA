@@ -16,10 +16,8 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      - name: Create and Push to New Branch
+      - name: Update origin_imgs and Push to Main
         run: |
-          BRANCH_NAME="update-origin-imgs-$(date +'%Y%m%d%H%M%S')"
-          git checkout -b $BRANCH_NAME
           mkdir -p temp_repo
           cd temp_repo
           git clone "https://github.com/markfinn0/teste_mobile.git"
@@ -28,6 +26,6 @@ jobs:
           cp -R "${GITHUB_WORKSPACE}/origin_imgs/." origin_imgs  # Copia apenas os arquivos da pasta origin_imgs
           git add origin_imgs/*
           git commit -m "Update origin_imgs"
-          git push origin $BRANCH_NAME
+          git push origin main
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
