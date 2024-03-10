@@ -16,8 +16,8 @@ jobs:
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
         git config --global credential.helper "store --file=$HOME/.github_token"
         git config --global http.extraheader "AUTHORIZATION: basic $ACCESS_TOKEN"
-        git clone https://github.com/markfinn0/teste_mobile.git
-        git clone https://github.com/markfinn0/Design_CARDENA.git
+        git clone git@github.com:markfinn0/teste_mobile.git
+        git clone git@github.com:markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     - name: Show content of teste_mobile before copying
