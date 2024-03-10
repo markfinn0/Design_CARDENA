@@ -11,28 +11,17 @@ jobs:
 
     steps:
     - name: Checkout Repositories
-      uses: actions/checkout@v2
-      with:
-        repository: markfinn0/teste_mobile
-        path: teste_mobile
-
-    - name: Set up SSH
       run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-    - name: Copy and Commit to Another Repository
-      run: |
-        mkdir -p temp_repo
-        cd temp_repo
-        git clone git@github.com:markfinn0/Design_CARDENA.git
-        cd Design_CARDENA
-        cp -R "${GITHUB_WORKSPACE}/origin_imgs/." .
-        cd ../teste_mobile
-        git add .
-        git commit -m "Copy repository changes"
-        GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa" git push
+        git clone https://github.com/markfinn0/teste_mobile.git
+        git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
-        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
+
+    - name: Copy Changes from Design_CARDENA to teste_mobile
+      run: |
+        rm -rf teste_mobile/*  # Remove todos os arquivos existentes no teste_mobile
+        cp -R Design_CARDENA/. teste_mobile
+        cd teste_mobile
+        git add .
+        git commit -m "Copy repository changes from Design_CARDENA"
+        git push
