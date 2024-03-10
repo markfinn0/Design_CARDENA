@@ -29,6 +29,6 @@ jobs:
           cp -R "${GITHUB_WORKSPACE}/origin_imgs/." origin_imgs  # Copia apenas os arquivos da pasta origin_imgs
           git add origin_imgs/*
           git commit -m "Update origin_imgs"
-          git push
+          git push origin HEAD:main
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.GH_TOKEN}}
+          SSH_DEPLOY_KEY: ${{ secrets.GH_TOKEN }}
