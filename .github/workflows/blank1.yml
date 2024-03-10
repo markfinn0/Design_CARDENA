@@ -11,6 +11,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Change to Repository Directory
+        run: cd $GITHUB_WORKSPACE  # Change to the root directory of the repository
+
       - name: Copy origin_imgs to Another Repository
         run: |
           mkdir -p temp_repo
