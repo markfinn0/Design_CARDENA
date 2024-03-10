@@ -17,6 +17,12 @@ jobs:
         ssh-keygen -t rsa -b 4096 -C "marquinhossouzarodrigueslive@gmail.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
+        mkdir -p ~/.ssh
+        echo "$ACCESS_TOKEN" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
