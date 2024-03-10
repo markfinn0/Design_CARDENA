@@ -17,6 +17,7 @@ jobs:
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
+        git remote set-url origin git@github.com:markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
