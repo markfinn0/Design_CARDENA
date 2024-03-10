@@ -18,8 +18,8 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: 'origin_imgs/'
+          source-directory: 'origin_imgs/'
           destination-username: 'markfinn0'
-          destination-repository: 'teste_mobile.github.io'
-          destination-directory: 'origin_imgs'
-          commit-email: 'marquinhossouzarodrigueslive@gmail.com'
+          destination-repository-name: 'teste_mobile/origin_imgs'
+          user-email: 'marquinhossouzarodrigueslive@gmail.com'
+          target-branch: main
