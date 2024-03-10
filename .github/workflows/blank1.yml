@@ -23,8 +23,6 @@ jobs:
 
     - name: Show content of teste_mobile before copying
       run: |
-        cd teste_mobile/
-        ls -al
         cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
         git add .
