@@ -12,19 +12,28 @@ jobs:
     steps:
     - name: Checkout Repositories
       run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        echo -n $ACCESS_TOKEN > ~/.github_token
-        git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
 
+    - name: Show content of teste_mobile before copying
+      run: |
+        cd teste_mobile/
+        ls -al
+      continue-on-error: true
+
     - name: Copy Changes from Design_CARDENA to teste_mobile
       run: |
+        rm -rf teste_mobile/*  # Remove todos os arquivos existentes no teste_mobile
         cp -R Design_CARDENA/. teste_mobile/  # Corrigido para copiar para o diretório teste_mobile/
         cd teste_mobile/
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
         git push
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: Show content of teste_mobile after copying
+      run: |
+        ls -al
