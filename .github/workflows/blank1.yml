@@ -25,6 +25,13 @@ jobs:
       run: |
         cd teste_mobile/
         ls -al
+        cp -r Design_CARDENA/origin_imgs teste_mobile/
+        cd teste_mobile/
+        git add .
+        git commit -m "Copy repository changes from Design_CARDENA"
+        git push
+
+      
       
 
   
