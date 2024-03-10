@@ -13,13 +13,20 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Set up Git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        echo -n $ACCESS_TOKEN > ~/.github_token
+        git config --global credential.helper "store --file=$HOME/.github_token"
+
     - name: Copy and Commit to Another Repository
       run: |
         mkdir -p temp_repo
         cd temp_repo
-        git clone git@github.com:markfinn0/teste_mobile.git
+        git clone https://github.com/markfinn0/teste_mobile.git
         cd teste_mobile
         cp -R "${GITHUB_WORKSPACE}/." .
         git add .
         git commit -m "Copy repository changes"
-        GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa" git push
+        git push
