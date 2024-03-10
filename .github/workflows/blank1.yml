@@ -16,21 +16,13 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Copy files to another repository
-        uses: nkoppel/push-files-to-another-repository@v1.1.2
+      - name: Push generated webpage to another repository
+        uses: nkoppel/push-files-to-another-repository@1.1.0
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: "origin_imgs/*"
-          destination-username: "markfinn0"
-          destination-repository: "teste_mobile"
-          destination-branch: "main"
-          destination-directory: "origin_imgs"
-          commit-email: "marquinhossouzarodrigueslive@gmail.com"
-          commit-message: "Update from ORIGIN_COMMIT"
-          API_TOKEN_GITHUB: "${{ secrets.GITHUB_TOKEN }}"
+          source-files: 'origin_imgs/'
+          destination-username: 'markfinn0'
+          destination-repository: 'teste_mobile.github.io'
+          destination-directory: 'origin_imgs'
+          commit-email: 'marquinhossouzarodrigueslive@gmail.com'
