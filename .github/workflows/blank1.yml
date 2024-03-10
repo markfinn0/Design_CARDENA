@@ -20,7 +20,7 @@ jobs:
         with:
           source-directory: 'origin_imgs/'  # Push all files in the root directory
           destination-github-username: 'markfinn0'
-          destination-repository-name: 'teste_mobile'
+          destination_repo: 'markfinn0/teste_mobile'
           destination-folder: 'origin_imgs'  # Push all files in the root directory
           user-email: 'marquinhossouzarodrigueslive@gmail.com'
           target-branch: main
