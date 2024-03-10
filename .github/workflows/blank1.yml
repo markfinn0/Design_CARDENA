@@ -24,8 +24,8 @@ jobs:
     - name: Copy Changes from Design_CARDENA to teste_mobile
       run: |
         rm -rf teste_mobile/*  # Remove todos os arquivos existentes no teste_mobile
-        cp -R Design_CARDENA/. teste_mobile
-        cd teste_mobile
+        cp -R Design_CARDENA/. teste_mobile/  # Corrigido para copiar para o diretório teste_mobile/
+        cd teste_mobile/
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
         git push
