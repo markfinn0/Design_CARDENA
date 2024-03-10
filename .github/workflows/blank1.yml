@@ -12,16 +12,10 @@ jobs:
     steps:
     - name: Checkout Repositories
       run: |
-        git config --global user.name "markfinn0"
-        git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
-        mkdir -p ~/.ssh
-        echo "$ACCESS_TOKEN" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_rsa
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
