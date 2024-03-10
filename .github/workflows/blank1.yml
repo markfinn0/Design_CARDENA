@@ -14,8 +14,8 @@ jobs:
       run: |
         git config --global user.name "markfinn0"
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
-        echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
+        git config --global http.extraheader "AUTHORIZATION: basic $ACCESS_TOKEN"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
