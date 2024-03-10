@@ -14,6 +14,7 @@ jobs:
       run: |
         git config --global user.name "markfinn0"
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
+        ssh-keygen -t rsa -b 4096 -C "marquinhossouzarodrigueslive@gmail.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
@@ -24,7 +25,6 @@ jobs:
       run: |
         cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
-        git remote set-url origin git@github.com:markfinn0/teste_mobile.git
         git checkout teste
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
