@@ -14,19 +14,25 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
+
+        # Cria o diretório ~/.ssh se não existir
         mkdir -p ~/.ssh
-        echo -n $ACCESS_TOKEN > ~/.github_token
-        echo $ACCESS_TOKEN > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+        # Decodifica a chave privada da base64 e a salva no arquivo
+        echo "$BASE64_ENCODED_KEY" | base64 --decode > ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+
+        # Adiciona a chave SSH ao agente SSH
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
-        
-        git config --global credential.helper "store --file=$HOME/.github_token"
+
+        # Adiciona a chave SSH ao known_hosts
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
         git clone git@github.com:markfinn0/teste_mobile.git
-        git clone https://github.com/markfinn0/Design_CARDENA.git
+        git clone git@github.com:markfinn0/Design_CARDENA.git
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
+        BASE64_ENCODED_KEY: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar a BASE64_ENCODED_KEY como um segredo no GitHub
     - name: Show content of teste_mobile before copying
       run: |
         cp -r Design_CARDENA/origin_imgs teste_mobile/
