@@ -20,12 +20,10 @@ jobs:
         run: |
           mkdir -p temp_repo
           cd temp_repo
-          git clone https://.:${{secrets.GITHUB_TOKEN}}@github.com/teste_mobile.git
+          git clone https://github.com/markfinn0/teste_mobile.git
           cd teste_mobile
           rm -rf origin_imgs/*  # Limpa o conteúdo existente da pasta origin_imgs
           cp -R "${GITHUB_WORKSPACE}/origin_imgs/." origin_imgs  # Copia apenas os arquivos da pasta origin_imgs
           git add origin_imgs/*
           git commit -m "Update origin_imgs"
           git push origin main
-        env:
-          GH_TOKEN: ${{ secrets.SSH_DEPLOY_KEY }}
