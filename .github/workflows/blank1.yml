@@ -20,7 +20,7 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: '.'  # Push all files in the root directory
+          source-directory: 'origin_imgs'  # Push only the 'origin_imgs' folder
           destination-github-username: 'markfinn0'
           destination-repository-name: 'teste_mobile'
           user-email: 'marquinhossouzarodrigueslive@gmail.com'
