@@ -19,7 +19,7 @@ jobs:
         mkdir -p ~/.ssh
 
         # Decodifica a chave privada da base64 e a salva no arquivo
-        echo "$BASE64_ENCODED_KEY" | base64 --decode > ~/.ssh/id_rsa
+        echo "${{ secrets.BASE64_ENCODED_KEY }}" | base64 --decode > ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
 
         # Adiciona a chave SSH ao agente SSH
