@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Repositories
       uses: actions/checkout@v2
+      with:
+        repositories:
+          - markfinn0/teste_mobile
+          - markfinn0/Design_CARDENA
 
     - name: Set up Git
       run: |
@@ -20,13 +24,11 @@ jobs:
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
 
-    - name: Copy and Commit to Another Repository
+    - name: Copy Changes from Design_CARDENA to teste_mobile
       run: |
-        mkdir -p temp_repo
-        cd temp_repo
-        git clone https://github.com/markfinn0/teste_mobile.git
-        cd teste_mobile
-        cp -R ../../Design_CARDENA/* .
+        cd Design_CARDENA
+        cp -R . ../teste_mobile
+        cd ../teste_mobile
         git add .
-        git commit -m "Copy repository changes"
+        git commit -m "Copy repository changes from Design_CARDENA"
         git push
