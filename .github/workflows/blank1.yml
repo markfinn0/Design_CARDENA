@@ -7,16 +7,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: pandoc/latex
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Change to Repository Directory
-        run: cd $GITHUB_WORKSPACE  # Change to the root directory of the repository
-
-      - name: Push to Another Repository
+      - name: Copy origin_imgs to Another Repository
         run: |
-          rsync -av --delete-excluded origin_imgs/ markfinn0@teste_mobile:origin_imgs/
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          mkdir -p temp_repo
+          cd temp_repo
+          git clone "https://github.com/markfinn0/teste_mobile.git"
+          cd teste_mobile
+          rm -rf origin_imgs/*  # Limpa o conteúdo existente da pasta origin_imgs
+          cp -R "${GITHUB_WORKSPACE}/origin_imgs"/* origin_imgs/
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add origin_imgs/*
+          git commit -m "Update origin_imgs"
+          git push origin main
