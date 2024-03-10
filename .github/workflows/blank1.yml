@@ -27,7 +27,8 @@ jobs:
         cd teste_mobile/
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
-        git push
+        git push --set-upstream origin main
+
 
       
       
