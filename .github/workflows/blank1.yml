@@ -11,9 +11,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Change to Repository Directory
-        run: cd $GITHUB_WORKSPACE  # Change to the root directory of the repository
-
       - name: Set up Git
         run: |
           git config --global user.name "GitHub Actions"
@@ -25,7 +22,7 @@ jobs:
           git checkout -b $BRANCH_NAME
           mkdir -p temp_repo
           cd temp_repo
-          git clone "git@github.com:markfinn0/teste_mobile.git"
+          git clone "https://github.com/markfinn0/teste_mobile.git"
           cd teste_mobile
           rm -rf origin_imgs/*  # Limpa o conteúdo existente da pasta origin_imgs
           cp -R "${GITHUB_WORKSPACE}/origin_imgs/." origin_imgs  # Copia apenas os arquivos da pasta origin_imgs
@@ -33,4 +30,4 @@ jobs:
           git commit -m "Update origin_imgs"
           git push origin $BRANCH_NAME
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
