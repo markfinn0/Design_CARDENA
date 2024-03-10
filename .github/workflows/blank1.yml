@@ -26,7 +26,7 @@ jobs:
         cd temp_repo
         git clone https://github.com/markfinn0/teste_mobile.git
         cd teste_mobile
-        cp -R ../Design_CARDENA/* .
+        cp -R ../../Design_CARDENA/* .
         git add .
         git commit -m "Copy repository changes"
         git push
