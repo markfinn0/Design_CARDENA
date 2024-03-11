@@ -28,12 +28,24 @@ jobs:
         cd client_mobile/
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
-        git push --all --force
+        git push Prod
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow1"
+        git push Hom
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow1"
+        git push Dev
         cd ..
         cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
         cd client_mobile/
         git add .
         git commit -m "Copiar Design Atualizado | Workflow2"
-        git push --all --force
+        git push Prod
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow2"
+        git push Hom
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow2"
+        git push Dev
 
 
