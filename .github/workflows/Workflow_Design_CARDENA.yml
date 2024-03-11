@@ -22,36 +22,61 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-    - name: Copiar arquivos para a Branch de client_mobile
+    - name: Deletar a pasta "reuse_imgs"
       run: |
         rm -r client_mobile/assets/asset/reuse_imgs
+
+    - name: Copiar arquivos para a Branch "Prod"
+      run: |
         cd client_mobile/
         git checkout Prod
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
-        git push Prod
+        git push origin Prod
+
+    - name: Copiar arquivos para a Branch "Hom"
+      run: |
         git checkout Hom
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
-        git push Hom
+        git push origin Hom
+
+    - name: Copiar arquivos para a Branch "Dev"
+      run: |
         git checkout Dev
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
-        git push Dev
+        git push origin Dev
+
+    - name: Copiar arquivos de volta para "Prod"
+      run: |
+        git checkout Prod
         cd ..
         cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
         cd client_mobile/
-        git checkout Prod
         git add .
         git commit -m "Copiar Design Atualizado | Workflow2"
-        git push Prod
+        git push origin Prod
+
+    - name: Copiar arquivos de volta para "Hom"
+      run: |
         git checkout Hom
+        cd ..
+        cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
+        cd client_mobile/
         git add .
         git commit -m "Copiar Design Atualizado | Workflow2"
-        git push Hom
+        git push origin Hom
+
+    - name: Copiar arquivos de volta para "Dev"
+      run: |
         git checkout Dev
+        cd ..
+        cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
+        cd client_mobile/
         git add .
         git commit -m "Copiar Design Atualizado | Workflow2"
-        git push Dev
-
-
+        git push origin Dev
