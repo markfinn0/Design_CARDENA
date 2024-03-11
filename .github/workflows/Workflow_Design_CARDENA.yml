@@ -25,7 +25,7 @@ jobs:
     - name: Show content of teste_mobile before copying
       run: |
         cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
-        cd teste_mobile/
+        cd client_mobile/
         git checkout Dev
         git add .
         git commit -m "Copiar Design Atualizado | Workflow"
