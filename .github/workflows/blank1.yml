@@ -12,20 +12,17 @@ jobs:
     steps:
     - name: Checkout Repositories
       run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
+        git config --global user.name "markfinn0"
+        git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
+        cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
         git checkout teste
-        git pull origin teste
-        cp -r ../Design_CARDENA/origin_imgs origin_imgs
-        git add origin_imgs/
+        git add .
         git commit -m "Copy repository changes from Design_CARDENA"
         git push --set-upstream origin teste
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-        
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
