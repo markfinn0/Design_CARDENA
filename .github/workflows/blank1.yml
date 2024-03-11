@@ -18,17 +18,14 @@ jobs:
         git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    - name: Show content of teste_mobile before copying
-      run: |
         cd teste_mobile/
         git checkout teste
         git pull origin teste
         cp -r ../Design_CARDENA/origin_imgs origin_imgs
         git add origin_imgs/
         git commit -m "Copy repository changes from Design_CARDENA"
-
-    - name: Git Push
-      run: |
         git push --set-upstream origin teste
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+        
