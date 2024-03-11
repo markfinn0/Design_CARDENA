@@ -10,18 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repositorie
+    - name: Checkout Repositories
       run: |
         git config --global user.name "markfinn0"
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
         echo -n $ACCESS_TOKEN > ~/.github_token
         git config --global credential.helper "store --file=$HOME/.github_token"
-        git config --global url.https://${{ secrets.ACCESS_TOKEN }}@github.com/.insteadOf https://github.com/
+        git config --global url."https://github.com/".insteadOf "https://github.com/"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
 
     - name: Show content of teste_mobile before copying
       run: |
@@ -30,8 +29,4 @@ jobs:
         git checkout teste
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
-        git push --set-upstream origin teste
-
-    - name: Git Push
-      run: |
         git push --set-upstream origin teste
