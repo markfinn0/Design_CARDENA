@@ -27,4 +27,7 @@ jobs:
         git checkout teste
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
-        git push --set-upstream origin teste
+
+    - name: git pushing
+      run: |
+        git push teste
