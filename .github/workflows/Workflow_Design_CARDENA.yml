@@ -21,7 +21,32 @@ jobs:
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        
+    - name: Copiar arquivos para a Branch "Prod"
+      run: |
+        cd client_mobile/
+        rm -r assets/asset/reuse_imgs
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow1"
+        git push origin Prod
+    
+    - name: Copiar arquivos para a Branch "Hom"
+      run: |
+        cd client_mobile/
+        git checkout Hom
+        rm -r assets/asset/reuse_imgs
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow1"
+        git push origin Hom
 
+    - name: Copiar arquivos para a Branch "Dev"
+      run: |
+        cd client_mobile/
+        git checkout Dev
+        rm -r assets/asset/reuse_imgs
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow1"
+        git push origin Dev
     - name: Copiar arquivos de volta para "Prod"
       run: |
         cd client_mobile/
