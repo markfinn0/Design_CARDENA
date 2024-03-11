@@ -26,6 +26,18 @@ jobs:
       run: |
         cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
         cd client_mobile/
+        git checkout Prod
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow"
+        git push --set-upstream origin Prod
+    - name: Show content of teste_mobile before copying
+      run: |
+        git checkout Hom
+        git add .
+        git commit -m "Copiar Design Atualizado | Workflow"
+        git push --set-upstream origin Hom
+    - name: Show content of teste_mobile before copying
+      run: |
         git checkout Dev
         git add .
         git commit -m "Copiar Design Atualizado | Workflow"
