@@ -18,6 +18,8 @@ jobs:
         git config --global credential.helper "store --file=$HOME/.github_token"
         git clone https://github.com/markfinn0/teste_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
+        hub remote set-url upstream https://github.com/markfinn0/teste_mobile.git
+        hub remote set-url origin https://github.com/markfinn0/teste_mobile.git
         cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
         git checkout teste
