@@ -20,8 +20,7 @@ jobs:
         git clone https://github.com/markfinn0/Design_CARDENA.git
         cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
-        git remote set-url upstream https://github.com/markfinn0/teste_mobile.git
-        git remote set-url origin https://github.com/markfinn0/teste_mobile.git
+        git remote set-url origin https://${ACCESS_TOKEN}@github.com/markfinn0/teste_mobile.git
         git checkout teste
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
