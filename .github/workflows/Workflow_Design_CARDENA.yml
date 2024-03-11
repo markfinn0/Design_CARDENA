@@ -27,7 +27,7 @@ jobs:
         cd client_mobile/
         git checkout Prod
         cd ..
-        cp -r ../Design_CARDENA/reuse_imgs client_mobile/assets/asset/
+        cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
         cd client_mobile/
         git add .
         git commit -m "Copiar Design Atualizado | Workflow2"
