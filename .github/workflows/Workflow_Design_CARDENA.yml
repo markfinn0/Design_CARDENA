@@ -17,16 +17,16 @@ jobs:
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
         git config --global url.https://${{ secrets.API_TOKEN_GITHUB }}@github.com/.insteadOf https://github.com/
         git config --global credential.useHttpPath true
-        git clone https://github.com/markfinn0/teste_mobile.git
+        git clone https://github.com/markfinn0/client_mobile.git
         git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-    - name: Show content of teste_mobile before copying
+    - name: Copiar arquivos para a Branch de client_mobile
       run: |
-        cp -r Design_CARDENA/origin_imgs teste_mobile/
-        cd teste_mobile/
-        git checkout teste
+        cp -r Design_CARDENA/reuse_imgs client_mobile/assets/asset/
+        cd client_mobile/
         git add .
-        git commit -m "Copy repository changes from Design_CARDENA"
-        git push --set-upstream origin teste
+        git commit -m "Copiar Design Atualizado | Workflow"
+        git push --all
+
