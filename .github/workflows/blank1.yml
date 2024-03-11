@@ -12,19 +12,14 @@ jobs:
     steps:
     - name: Checkout Repositories
       run: |
-        git clone git@github.com:markfinn0/teste_mobile.git
-        git clone git@github.com:markfinn0/Design_CARDENA.git
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        echo -n $ACCESS_TOKEN > ~/.github_token
+        git config --global credential.helper "store --file=$HOME/.github_token"
+        git clone https://github.com/markfinn0/teste_mobile.git
+        git clone https://github.com/markfinn0/Design_CARDENA.git
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    - name: Debug SSH
-      run: |
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/sua_chave_ssh
-        echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
-        ssh -T git@github.com
-        ls -al ~/.ssh
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}  # Lembre-se de adicionar o ACCESS_TOKEN como um segredo no GitHub
     - name: Show content of teste_mobile before copying
       run: |
         cp -r Design_CARDENA/origin_imgs teste_mobile/
