@@ -22,15 +22,12 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-    - name: Deletar a pasta "reuse_imgs"
-      run: |
-        rm -r client_mobile/assets/asset/reuse_imgs
-
     - name: Copiar arquivos para a Branch "Prod"
       run: |
         cd client_mobile/
         git checkout Prod
-        rm -r assets/asset/reuse_imgs
+        git pull
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
         git push origin Prod
@@ -38,7 +35,7 @@ jobs:
     - name: Copiar arquivos para a Branch "Hom"
       run: |
         git checkout Hom
-        rm -r assets/asset/reuse_imgs
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
         git push origin Hom
@@ -46,7 +43,7 @@ jobs:
     - name: Copiar arquivos para a Branch "Dev"
       run: |
         git checkout Dev
-        rm -r assets/asset/reuse_imgs
+        rm -r client_mobile/assets/asset/reuse_imgs
         git add .
         git commit -m "Copiar Design Atualizado | Workflow1"
         git push origin Dev
