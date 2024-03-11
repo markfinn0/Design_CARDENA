@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repositories
+    - name: Checkout Repositorie
       run: |
         git config --global user.name "markfinn0"
         git config --global credential.username "markfinn0"
