@@ -12,17 +12,24 @@ jobs:
     steps:
     - name: Checkout Repositories
       run: |
-        mkdir -p temp_repo
-        cd temp_repo
         git clone git@github.com:markfinn0/teste_mobile.git
         git clone git@github.com:markfinn0/Design_CARDENA.git
-      # Não é necessário definir ACCESS_TOKEN ao usar SSH
-
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    - name: Debug SSH
+      run: |
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/sua_chave_ssh
+        echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
+        ssh -T git@github.com
+        ls -al ~/.ssh
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     - name: Show content of teste_mobile before copying
       run: |
         cp -r Design_CARDENA/origin_imgs teste_mobile/
         cd teste_mobile/
-        git checkout -b teste  # Cria e muda para a branch "teste"
+        git checkout teste
         git add .
         git commit -m "Copy repository changes from Design_CARDENA"
         git push --set-upstream origin teste
