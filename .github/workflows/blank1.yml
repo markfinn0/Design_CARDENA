@@ -13,6 +13,7 @@ jobs:
     - name: Checkout Repositories
       run: |
         git config --global user.name "markfinn0"
+        git config --global credential.username "markfinn0"
         git config --global user.email "marquinhossouzarodrigueslive@gmail.com"
         git config --global url.https://${{ secrets.API_TOKEN_GITHUB }}@github.com/.insteadOf https://github.com/
         git clone https://github.com/markfinn0/teste_mobile.git
