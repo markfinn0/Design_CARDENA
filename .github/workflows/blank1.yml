@@ -30,4 +30,4 @@ jobs:
 
     - name: git pushing
       run: |
-        git push teste
+        git push --set-upstream origin teste
